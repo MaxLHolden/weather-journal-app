@@ -19,6 +19,7 @@ function Generate_OnClick(event) {
     GetWeather(baseURL, newZip, apiKey)
       .then(function (userData) {
         // TODO post data
+        postData('/add', { date: newDate, temp: userData.main.temp, content })
       }).then(function (newData) {
         // TODO update UU
       })
@@ -38,3 +39,26 @@ const GetWeather = async (baseURL, newZip, apiKey) => {
       console.log("error", error);
     }
   }
+
+/* Function to POST data */
+const postData = async (url = '', data = {}) => {
+    const req = await fetch(url, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+      body: JSON.stringify({
+        date: data.date,
+        temp: data.temp,
+        content: data.content
+      })
+    })
+    try {
+      const newData = await req.json();
+      return newData;
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
