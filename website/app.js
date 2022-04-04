@@ -1,16 +1,16 @@
-const { appendFile } = require("fs");
+//const { appendFile } = require("fs");
 
 /* Global Variables */
-const apiKey = "f8c5f2aecdaf9cd29865690ea6558781&units=imperial";
-const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip="
+const apiKey = 'f8c5f2aecdaf9cd29865690ea6558781';
+const baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-document.getElementById('generate').addEventListener('click', Generate_OnClick);
+document.getElementById('generate').addEventListener('click', generateOnClick);
 
-function Generate_OnClick(event) {
+function generateOnClick(event) {
     event.preventDefault();
     // get user input values
     const newZip = document.getElementById('zip').value;
@@ -22,13 +22,14 @@ function Generate_OnClick(event) {
       }).then(function (newData) {
             updateUI();
       })
+      console.log("Generate On Click");
     // reset form
-    form.reset();
+    //form.reset();
   }
 
 const getWeather = async (baseURL, newZip, apiKey) => {
     // res equals to the result of fetch function
-    const res = await fetch(baseURL + newZip + apiKey);
+    const res = await fetch(baseURL + newZip + '&APPID=' + apiKey);
     try {
       // userData equals to the result of fetch function
       const userData = await res.json();
