@@ -18,10 +18,9 @@ function Generate_OnClick(event) {
   
     getWeather(baseURL, newZip, apiKey)
       .then(function (userData) {
-        // TODO post data
-        postData('/add', { date: newDate, temp: userData.main.temp, content })
+            postData('/add', { date: newDate, temp: userData.main.temp, content })
       }).then(function (newData) {
-        // TODO update UU
+            updateUI();
       })
     // reset form
     form.reset();
