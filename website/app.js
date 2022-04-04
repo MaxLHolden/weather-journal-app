@@ -16,7 +16,7 @@ function Generate_OnClick(event) {
     const newZip = document.getElementById('zip').value;
     const content = document.getElementById('feelings').value;
   
-    GetWeather(baseURL, newZip, apiKey)
+    getWeather(baseURL, newZip, apiKey)
       .then(function (userData) {
         // TODO post data
         postData('/add', { date: newDate, temp: userData.main.temp, content })
@@ -27,8 +27,7 @@ function Generate_OnClick(event) {
     form.reset();
   }
 
-  
-const GetWeather = async (baseURL, newZip, apiKey) => {
+const getWeather = async (baseURL, newZip, apiKey) => {
     // res equals to the result of fetch function
     const res = await fetch(baseURL + newZip + apiKey);
     try {
@@ -60,5 +59,19 @@ const postData = async (url = '', data = {}) => {
     }
     catch (error) {
       console.log(error);
+    }
+  };
+
+  const updateUI = async () => {
+    const request = await fetch('/all');
+    try {
+      const allData = await request.json()
+      // update new entry values
+      document.getElementById('date').innerHTML = allData.date;
+      document.getElementById('temp').innerHTML = allData.temp;
+      document.getElementById('content').innerHTML = allData.content;
+    }
+    catch (error) {
+      console.log("error", error);
     }
   };
