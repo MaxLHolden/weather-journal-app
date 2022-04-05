@@ -1,7 +1,7 @@
 //const { appendFile } = require("fs");
 
 /* Global Variables */
-const apiKey = 'f8c5f2aecdaf9cd29865690ea6558781';
+const apiKey = 'f8c5f2aecdaf9cd29865690ea6558781&units=imperial';
 const baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 
 // Create a new date instance dynamically with JS
@@ -67,8 +67,8 @@ const postData = async (url = '', data = {}) => {
     try {
       const allData = await request.json()
       // update new entry values
-      document.getElementById('date').innerHTML = allData.date;
-      document.getElementById('temp').innerHTML = allData.temp;
+      document.getElementById('date').innerHTML = 'Date: ' + allData.date;
+      document.getElementById('temp').innerHTML = allData.temp + ' Degrees';
       document.getElementById('content').innerHTML = allData.content;
     }
     catch (error) {
