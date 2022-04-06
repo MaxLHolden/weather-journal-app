@@ -28,10 +28,8 @@ function generateOnClick(event) {
   }
 
 const getWeather = async (baseURL, newZip, apiKey) => {
-    // res equals to the result of fetch function
     const res = await fetch(baseURL + newZip + '&APPID=' + apiKey);
     try {
-      // userData equals to the result of fetch function
       const userData = await res.json();
       return userData;
     } catch (error) {
